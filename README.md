@@ -162,3 +162,18 @@ Standard --> Transporteur : utilise
 
 
 ```
+
+
+```plantuml
+@startuml
+start
+:Utilisateur standard;
+:S'identifier;
+:choisis un livre;
+:reserver un livre;
+repeat
+repeat while (livre dispo) is (no) not (yes)
+stop
+@enduml
+
+```
