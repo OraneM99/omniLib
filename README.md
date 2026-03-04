@@ -20,7 +20,6 @@ rectangle "Portail OmniLib" {
     (Consulter catalogue) as UC_Catalogue
     (Télécharger eBooks) as UC_Telecharger
     (Louer une VOD) as UC_Louer
-    (Réserver un livre en ligne) as UC_Reserver
     (Emprunter au guichet) as UC_Emprunt
     (Commander en ligne) as UC_Ligne
     (Livrer à domicile) as UC_Transport 
@@ -42,7 +41,6 @@ actor "Transporteur" as TR
 VS -- UC_Portail
 VS -- UC_Catalogue
 
-ST -- UC_Reserver
 ST -- UC_Ligne
 ST -- UC_Emprunt
 
@@ -63,3 +61,104 @@ UC_Transport -- TR
 
 
 
+```mermaid
+classDiagram
+
+Personne <|-- Visiteur
+Personne <|-- Bibliothecaire
+Visiteur <|-- Standard
+Standard <|-- Premium
+
+Media <|-- MediaPhysique
+Media <|-- MediaNumerique
+
+MediaPhysique <|-- Livre
+MediaNumerique <|-- Ebooks
+MediaNumerique <|-- VOD
+
+class Personne  {
+<<abstract>>
+}
+
+class Visiteur {
++consulterCatalogue()
++naviguerPortail()
+}
+
+class Standard {
+-String nom
+-String prenom
+-int numeroAdherent
++commanderEnLigne()
++emprunterAuGuichet()
+}
+
+class Premium {
+-int numeroDeForfait
++louerVod()
++telechargerEbooks()
+}
+
+class Bibliothecaire {
+-String nom
+-String prenom
++validerRetour()
++mettreAJourCatalogue()
++validerEmprunt()
+}
+
+class Media {
+<<abstract>>
+-String titre
+-String auteur
+-int anneeEdition
+}
+
+class MediaPhysique {
+<<abstract>>
+}
+
+class MediaNumerique {
+<<abstract>>
+}
+
+class Catalogue {
+-int numeroRayon
++rechercher()
+}
+
+class Livre {
+-int codeBarre
+-int anneeEdition
+}
+
+class EtatUsure {
+	<<enumeration>>
+	NEUF
+	BON ETAT
+	MOYEN
+	MAUVAIS
+}
+
+class Ebooks {
+-int taille
+-String format 
+}
+
+class VOD {
+-int duree
+-String resolution
+}
+
+class Transporteur {
+-int numeroSuivi
++livrerDomicile()
+}
+
+Visiteur o-- Catalogue : utilise
+Livre *-- EtatUsure : composition
+Catalogue --* Media : contient
+Standard --> Transporteur : utilise
+
+
+```
