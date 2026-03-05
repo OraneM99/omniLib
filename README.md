@@ -155,10 +155,9 @@ class Transporteur {
 +livrerDomicile()
 }
 
-Visiteur o-- Catalogue : utilise
+Visiteur --> Catalogue : connait
 Livre *-- EtatUsure : composition
 Catalogue --* Media : contient
-Standard --> Transporteur : utilise
 
 
 ```
@@ -169,10 +168,19 @@ Standard --> Transporteur : utilise
 start
 :Utilisateur standard;
 :S'identifier;
-:choisis un livre;
-:reserver un livre;
 repeat
+repeat
+:choisis un livre;
+
+:reserver un livre;
+
 repeat while (livre dispo) is (no) not (yes)
+
+
+repeat while (penalite de retard) is (yes) not (no)
+:confirmer reservation;
+
+:options de livraison;
 stop
 @enduml
 
