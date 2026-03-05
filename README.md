@@ -33,7 +33,7 @@ rectangle "Portail OmniLib" {
     UC_Emprunt ..> UC_Valider : <<include>>
     UC_Verifier ..> UC_Valider : <<include>>
     UC_Retours ..> UC_Valider : <<include>>
-    UC_Ligne ..> UC_Transport : <<extend>>
+    UC_Ligne <.. UC_Transport : <<extend>>
 }
 
 actor "Transporteur" as TR
@@ -129,7 +129,6 @@ class Catalogue {
 
 class Livre {
 -int codeBarre
--int anneeEdition
 }
 
 class EtatUsure {
